@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:linear-gradient(to right, #e8f5e9, #f1fff1);
+            margin:0;
+        }
+
+        h1{
+            text-align:center;
+            color:#1B5E20;
+            margin-top:20px;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            margin:20px auto;
+            border-radius:15px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+            text-align:center;
+            max-width:700px;
+        }
+
+        .stat{
+            font-size:24px;
+            font-weight:bold;
+            color:#2E8B57;
+        }
+
+        canvas{
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Admin Dashboard 📊</h1>
+
+    <div class="container">
+
+        <!-- TOTAL DONATIONS -->
+        <div class="card">
+            <h2>Total Donations</h2>
+            <p class="stat">{{ total }}</p>
+        </div>
+
+        <!-- BAR CHART -->
+        <div class="card">
+            <h2>Food Donation Analysis</h2>
+            <canvas id="barChart"></canvas>
+        </div>
+
+    </div>
+
+<script>
+
+    // SAFE DATA FROM FLASK (NO ERROR METHOD)
+    const labels = JSON.parse('{{ chart_labels | tojson | safe }}');
+    const values = JSON.parse('{{ chart_values | tojson | safe }}');
+
+    // BAR CHART
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Food Quantity / Count',
+                data: values,
+                backgroundColor: '#2E8B57'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

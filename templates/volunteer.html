@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foodoraa Volunteer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body{
+            background:#0f172a;
+            color:white;
+            font-family:Arial;
+        }
+
+        h1{
+            text-align:center;
+            margin-top:25px;
+            color:#39FF14;
+            text-shadow:0 0 15px #39FF14;
+            font-size:40px;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            padding-bottom:100px;
+        }
+
+        /* DELIVERY CARD */
+
+        .delivery-card{
+            max-width:550px;
+            margin:25px auto;
+
+            padding:25px;
+
+            border-radius:20px;
+
+            background:rgba(255,255,255,0.08);
+
+            border:1px solid rgba(255,255,255,0.2);
+
+            backdrop-filter:blur(12px);
+
+            box-shadow:
+            0 0 20px rgba(57,255,20,0.2);
+
+            transition:0.4s;
+
+            text-align:center;
+        }
+
+        .delivery-card:hover{
+            transform:translateY(-8px);
+
+            box-shadow:
+            0 0 20px #39FF14,
+            0 0 40px rgba(57,255,20,0.4);
+        }
+
+        .food{
+            color:#39FF14;
+            font-size:28px;
+            font-weight:bold;
+
+            text-shadow:0 0 10px #39FF14;
+        }
+
+        p{
+            color:#d1d5db;
+            font-size:17px;
+        }
+
+        .price{
+            color:#00E5FF;
+            font-size:22px;
+            font-weight:bold;
+
+            text-shadow:0 0 10px #00E5FF;
+        }
+
+        /* BUTTONS */
+
+        .btn-container{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:15px;
+            margin-top:20px;
+        }
+
+        .btn{
+            width:75%;
+            padding:13px;
+
+            border:none;
+            border-radius:12px;
+
+            cursor:pointer;
+
+            font-size:16px;
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        /* ACCEPT BUTTON */
+
+        .accept{
+            background:linear-gradient(to right,#39FF14,#00ff95);
+
+            color:black;
+
+            box-shadow:0 0 15px #39FF14;
+        }
+
+        .accept:hover{
+            transform:scale(1.05);
+
+            box-shadow:
+            0 0 20px #39FF14,
+            0 0 40px #39FF14;
+        }
+
+        /* MAP BUTTON */
+
+        .map{
+            background:linear-gradient(to right,#00E5FF,#BC13FE);
+
+            color:white;
+
+            box-shadow:0 0 15px #00E5FF;
+        }
+
+        .map:hover{
+            transform:scale(1.05);
+
+            box-shadow:
+            0 0 20px #00E5FF,
+            0 0 40px #BC13FE;
+        }
+
+        /* STATUS */
+
+        .status{
+            margin-top:15px;
+            color:#39FF14;
+            font-weight:bold;
+
+            text-shadow:0 0 10px #39FF14;
+        }
+
+        /* EMPTY */
+
+        .empty{
+            text-align:center;
+            margin-top:100px;
+            color:#9ca3af;
+            font-size:20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Volunteer Delivery 🚴</h1>
+
+    <div class="container">
+
+        {% if data %}
+
+            {% for item in data %}
+
+            <div class="delivery-card">
+
+                <div class="food">
+                    🍱 {{ item[1] }}
+                </div>
+
+                <p>
+                    📦 Quantity: {{ item[2] }}
+                </p>
+
+                <p>
+                    👥 Serves: {{ item[3] }} People
+                </p>
+
+                <p>
+                    📍 Location: {{ item[4] }}
+                </p>
+
+                <div class="price">
+                    Earn ₹50 Per Delivery 💰
+                </div>
+
+                <!-- BUTTONS -->
+
+                <div class="btn-container">
+
+                    <!-- ACCEPT -->
+
+                    <button class="btn accept"
+                    onclick="window.location.href='/accept/{{ item[1] }}/{{ item[4] }}'">
+
+                        Accept Delivery
+
+                    </button>
+
+                    <!-- MAP -->
+
+                    <button class="btn map"
+                    onclick="openMap('{{ item[4] }}')">
+
+                        Open Map 📍
+
+                    </button>
+
+                </div>
+
+                <div class="status">
+                    Ready for Pickup ⚡
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                No Deliveries Available 🚫
+            </div>
+
+        {% endif %}
+
+    </div>
+
+<script>
+
+function openMap(location){
+
+    window.open(
+        "https://www.google.com/maps/search/" + location,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Foodoraa</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Welcome to Foodoraa</h1>
+
+        <div class="cards">
+
+            <a href="/volunteer" class="card">
+
+                <h2>Volunteer</h2>
+
+                <p>Deliver food and earn</p>
+
+            </a>
+
+            <a href="/donate" class="card">
+
+                <h2>Donate</h2>
+
+                <p>Donate excess food</p>
+
+            </a>
+
+            <a href="/admin" class="card">
+
+                <h2>Admin</h2>
+
+                <p>Manage system</p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="bottom-nav">
+
+        <a href="/">Home</a>
+
+        <a href="/about">About</a>
+
+        <a href="/savings">Savings</a>
+
+    </div>
+
+</body>
+</html>

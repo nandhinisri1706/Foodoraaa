@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Donate</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>Donate Food</h1>
+
+        <form method="POST">
+
+            <input type="text"
+            name="food"
+            placeholder="Food Name">
+
+            <input type="text"
+            name="quantity"
+            placeholder="Quantity">
+
+            <input type="text"
+            name="serves"
+            placeholder="Serves People">
+
+            <input type="text"
+            name="location"
+            placeholder="Location">
+
+            <button type="submit">
+                Donate
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
